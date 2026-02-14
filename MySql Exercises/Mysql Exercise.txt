@@ -1,0 +1,99 @@
+-- =====================================
+-- BASIC MYSQL PROGRAMS
+-- =====================================
+
+-- 1. CREATE DATABASE
+CREATE DATABASE college_db;
+USE college_db;
+
+-- 2. CREATE TABLE
+CREATE TABLE students (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50),
+    age INT,
+    dept VARCHAR(30),
+    marks INT
+);
+
+-- 3. INSERT DATA
+INSERT INTO students (name, age, dept, marks) VALUES
+('Anil', 20, 'CSE', 85),
+('Rahul', 21, 'ECE', 78),
+('Priya', 19, 'CSE', 92),
+('Kiran', 22, 'MECH', 70);
+
+-- 4. DISPLAY TABLE DATA
+SELECT * FROM students;
+
+-- 5. WHERE CLAUSE
+SELECT * FROM students WHERE dept = 'CSE';
+
+-- 6. ORDER BY
+SELECT * FROM students ORDER BY marks DESC;
+
+-- 7. UPDATE RECORD
+UPDATE students
+SET marks = 88
+WHERE name = 'Rahul';
+
+-- 8. DELETE RECORD
+DELETE FROM students
+WHERE name = 'Kiran';
+
+-- 9. AGGREGATE FUNCTIONS
+SELECT COUNT(*) AS total_students FROM students;
+SELECT AVG(marks) AS average_marks FROM students;
+SELECT MAX(marks) AS highest_marks FROM students;
+SELECT MIN(marks) AS lowest_marks FROM students;
+
+-- 10. GROUP BY
+SELECT dept, AVG(marks) AS avg_marks
+FROM students
+GROUP BY dept;
+
+-- 11. LIKE OPERATOR
+SELECT * FROM students
+WHERE name LIKE 'A%';
+
+-- 12. LIMIT
+SELECT * FROM students
+LIMIT 2;
+
+-- 13. ALTER TABLE (ADD COLUMN)
+ALTER TABLE students
+ADD email VARCHAR(50);
+
+-- 14. DROP COLUMN
+ALTER TABLE students
+DROP COLUMN email;
+
+-- 15. CREATE SECOND TABLE (for JOIN)
+CREATE TABLE courses (
+    course_id INT PRIMARY KEY AUTO_INCREMENT,
+    student_id INT,
+    course_name VARCHAR(50),
+    FOREIGN KEY (student_id) REFERENCES students(id)
+);
+
+-- 16. INSERT INTO COURSES
+INSERT INTO courses (student_id, course_name) VALUES
+(1, 'Java'),
+(2, 'Python'),
+(3, 'DBMS');
+
+-- 17. INNER JOIN
+SELECT students.name, courses.course_name
+FROM students
+INNER JOIN courses
+ON students.id = courses.student_id;
+
+-- 18. VIEW CREATION
+CREATE VIEW cse_students AS
+SELECT * FROM students WHERE dept='CSE';
+
+-- 19. SHOW VIEW DATA
+SELECT * FROM cse_students;
+
+-- 20. DROP TABLE (optional)
+-- DROP TABLE courses;
+-- DROP TABLE students;
