@@ -1,0 +1,15 @@
+# BackEnd (Java/Maven)
+BackEnd/target/
+BackEnd/*.log
+BackEnd/.idea/
+BackEnd/*.iml
+
+# FrontEnd (React/Node)
+FrontEnd/node_modules/
+FrontEnd/build/
+FrontEnd/.env
+FrontEnd/dist/
+
+# OS files
+.DS_Store
+Thumbs.db
